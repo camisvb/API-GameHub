@@ -41,7 +41,7 @@ export function atualizar(req, res, next) {
     }
     const dados = { nome: nome.trim(), pais: pais.trim() };
 
-    // Consulta didática para confirmar que o registro existe antes de editar.
+
     estudioModel.buscarPorId(req.id, (erro, registros) => {
         if (erro) return next(erro);
         if (registros.length === 0) {
@@ -55,7 +55,7 @@ export function atualizar(req, res, next) {
 }
 
 export function excluir(req, res, next) {
-    estudioModel.excluir(req.id, (erro, resultado) => {
+    estudioModel.deletar(req.id, (erro, resultado) => {
         if (erro) return next(erro);
         if (resultado.affectedRows === 0) {
             return res.status(404).json({ erro: "Estúdio não encontrado" });
